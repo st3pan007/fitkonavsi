@@ -122,7 +122,8 @@ body {
 }
 
 .container {
-    max-width: 1400px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -516,7 +517,7 @@ body {
 /* About Section */
 .advantages {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2.5rem;
     position: relative;
     z-index: 2;
@@ -600,7 +601,7 @@ body {
 /* Trainers Section */
 .trainers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 5rem;
     position: relative;
     z-index: 2;
@@ -827,7 +828,7 @@ body {
 /* Services Section */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2.5rem;
     position: relative;
     z-index: 2;
@@ -943,7 +944,7 @@ body {
 /* Pricing Section */
 .pricing-categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 3rem;
     position: relative;
     z-index: 2;
@@ -1384,7 +1385,7 @@ body {
     }
 
     .hero-stats {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 
     .trainers-grid {
@@ -1579,7 +1580,7 @@ body {
 /* Gallery Grid - Mřížka fotek */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     position: relative;
     z-index: 2;
