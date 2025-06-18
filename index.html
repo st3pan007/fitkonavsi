@@ -1,665 +1,1772 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R-fitness Návsí - Moderní fitness centrum s certifikovanými trenéry</title>
-    <meta name="description" content="R-fitness Návsí - profesionální fitness centrum s moderním vybavením Technogym a Grünsport. Certifikovaní trenéři, osobní tréninky. První trénink ZDARMA!">
-    
-    <!-- External Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader"></div>
-    </div>
+/* R-fitness Návsí - Modern Professional CSS */
 
-    <!-- Particles -->
-    <div class="particles" id="particles"></div>
+/* ========== CSS Variables ========== */
+:root {
+  /* Colors */
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #8b5cf6;
+  --secondary: #f59e0b;
+  --accent: #06b6d4;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
 
-    <header class="header" id="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="#home" class="logo">R-FITNESS NÁVSÍ</a>
-                <div class="nav-container">
-                    <nav>
-                        <ul class="nav" id="nav">
-                            <li><a href="#home">Domů</a></li>
-                            <li><a href="#about">O nás</a></li>
-                            <li><a href="#trainers">Trenéři</a></li>
-                            <li><a href="#services">Služby</a></li>
-                            <li><a href="#gallery">Galerie</a></li>
-                            <li><a href="#pricing">Ceník</a></li>
-                            <li><a href="#contact">Kontakt</a></li>
-                        </ul>
-                    </nav>
-                    <button class="theme-toggle" id="themeToggle" title="Přepnout motiv">
-                        <svg id="themeIcon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
-                        </svg>
-                    </button>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-                </div>
-            </div>
-        </div>
-    </header>
+  /* Neutrals */
+  --black: #0f0f0f;
+  --gray-900: #111827;
+  --gray-800: #1f2937;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-500: #6b7280;
+  --gray-400: #9ca3af;
+  --gray-300: #d1d5db;
+  --gray-200: #e5e7eb;
+  --gray-100: #f3f4f6;
+  --white: #ffffff;
 
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text fade-in">
-                    <h1>Váš partner na cestě k <span class="highlight">dokonalé kondici</span></h1>
-                    <p>Moderní fitness centrum s certifikovanými trenéry a profesionálním vybavením Technogym a Grünsport v srdci Návsí.</p>
-                    <div class="cta-buttons">
-                        <a href="#contact" class="btn btn-primary interactive-element">Kontaktujte nás</a>
-                        <a href="#trainers" class="btn btn-secondary interactive-element">První trénink ZDARMA</a>
-                    </div>
-                </div>
-                <div class="hero-stats slide-in-right">
-                    <div class="stat">
-                        <span class="stat-number" data-target="30">0+</span>
-                        <span class="stat-label">Let zkušeností</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" data-target="2">0+</span>
-                        <span class="stat-label">Certifikovaní trenéři</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" data-target="600">0+</span>
-                        <span class="stat-label">m² prostoru</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  /* Theme specific */
+  --background: var(--black);
+  --surface: var(--gray-900);
+  --surface-hover: var(--gray-800);
+  --text-primary: var(--white);
+  --text-secondary: var(--gray-300);
+  --text-muted: var(--gray-500);
+  --border: var(--gray-800);
+  --border-light: var(--gray-700);
 
-    <section class="section" id="about">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Proč zvolit R-fitness Návsí</h2>
-                <p class="section-subtitle">Kombinujeme moderní vybavení s osobním přístupem pro dosažení vašich fitness cílů</p>
-            </div>
-            <div class="advantages">
-                <div class="advantage-card fade-in interactive-element">
-                    <div class="advantage-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </div>
-                    <h3>Individuální péče</h3>
-                    <p>Každý klient je pro nás jedinečný. Nabízíme personalizované tréninky a první lekci s osobním trenérem zcela zdarma.</p>
-                </div>
-                <div class="advantage-card fade-in interactive-element">
-                    <div class="advantage-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <h3>Moderní vybavení</h3>
-                    <p>Kvalitní posilovací stroje značek Technogym a Grünsport v nové moderní hale o rozloze 600 m². Vždy nejnovější technologie pro váš trénink.</p>
-                </div>
-                <div class="advantage-card fade-in interactive-element">
-                    <div class="advantage-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63c-.34-1.02-1.28-1.65-2.34-1.65-.38 0-.73.1-1.04.28L14.5 8.5c-.98.67-2.04.68-3.02 0L9.4 7c-.31-.18-.66-.28-1.04-.28-1.06 0-2 .63-2.34 1.65L3.5 16H6v6h4v-6h4v6h4z"/>
-                        </svg>
-                    </div>
-                    <h3>Certifikovaní trenéři</h3>
-                    <p>Naši zkušení trenéři Tomáš Martynek (IPF závodník) a Pavel Lorenczyk (30+ let praxe) vás provedou každým krokem k vašim cílům.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', var(--font-primary);
 
-    <section class="section" id="trainers">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Naši trenéři</h2>
-                <p class="section-subtitle">Zkušení profesionálové, kteří vás dovedou k vašim cílům</p>
-            </div>
-            <div class="trainers-grid">
-                <div class="trainer-card slide-in-left interactive-element">
-                    <div class="trainer-header">
-                        <h3>Tomáš Martynek</h3>
-                        <p class="trainer-position">Certifikovaný trenér • IPF závodník</p>
-                    </div>
-                    <div class="timeline" id="timeline1">
-                        <div class="timeline-item interactive-element" data-year="2003-2017">
-                            <div class="timeline-year">2003-2017</div>
-                            <div class="timeline-title">Fotbalová kariéra</div>
-                            <div class="timeline-desc">14 let aktivního fotbalu, účast v nejvyšší dorostenecké lize za Třinec.</div>
-                        </div>
-                        <div class="timeline-item interactive-element" data-year="2017">
-                            <div class="timeline-year">2017</div>
-                            <div class="timeline-title">Začátky ve fitness</div>
-                            <div class="timeline-desc">První návštěva posilovny v 17 letech, váha 48 kg. Objevení lásky k silovému tréninku.</div>
-                        </div>
-                        <div class="timeline-item interactive-element" data-year="2022">
-                            <div class="timeline-year">2022</div>
-                            <div class="timeline-title">IPF závodník</div>
-                            <div class="timeline-desc">Začátek závodění v prestižní naturální federaci silového trojboje IPF.</div>
-                        </div>
-                        <div class="timeline-item interactive-element" data-year="2023">
-                            <div class="timeline-year">2023</div>
-                            <div class="timeline-title">Mistrovství světa</div>
-                            <div class="timeline-desc">Účast na Mistrovství světa IPF v Rumunsku - vrchol dosavadní kariéry.</div>
-                        </div>
-                        <div class="timeline-item interactive-element" data-year="2024">
-                            <div class="timeline-year">2024</div>
-                            <div class="timeline-title">Certifikovaný trenér</div>
-                            <div class="timeline-desc">Získání certifikace a začátek profesionální trenérské dráhy.</div>
-                        </div>
-                    </div>
-                    <div class="trainer-specializations">
-                        <div class="spec-tags">
-                            <span class="spec-tag">Silový trénink</span>
-                            <span class="spec-tag">Powerlifting</span>
-                            <span class="spec-tag">soutěže IPF</span>
-                            <span class="spec-tag">Závodní příprava</span>
-                            <span class="spec-tag">Individuální tréninky</span>
-                        </div>
-                    </div>
-                    <div class="trainer-cta">
-                        <a href="https://tomasmartynek.cz/" target="_blank" class="btn btn-primary interactive-element">Navštívit web</a>
-                    </div>
-                </div>
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
 
-                <div class="trainer-card slide-in-right interactive-element">
-                    <div class="trainer-header">
-                        <h3>Pavel Lorenczyk</h3>
-                        <p class="trainer-position">Certifikovaný trenér kulturistiky</p>
-                    </div>
-                    <div class="timeline" id="timeline2">
-                        <div class="timeline-item interactive-element" data-year="1990-2000">
-                            <div class="timeline-year">1990-2000</div>
-                            <div class="timeline-title">Začátky v kulturistice</div>
-                            <div class="timeline-desc">Prvních krůčky ve světě kulturistiky a fitness tréninku.</div>
-                        </div>
-                        <div class="timeline-item interactive-element" data-year="2000-2010">
-                            <div class="timeline-year">2000-2010</div>
-                            <div class="timeline-title">Fitness centrum Bystřice</div>
-                            <div class="timeline-desc">Získávání cenných zkušeností jako trenér v místním fitness centru.</div>
-                        </div>
-                        <div class="timeline-item interactive-element" data-year="2010-2020">
-                            <div class="timeline-year">2010-2020</div>
-                            <div class="timeline-title">Queen & Stars</div>
-                            <div class="timeline-desc">Působení ve fitness centrech Queen a Stars, rozšiřování klientely.</div>
-                        </div>
-                        <div class="timeline-item interactive-element" data-year="2020">
-                            <div class="timeline-year">2020</div>
-                            <div class="timeline-title">Certifikace kulturistika</div>
-                            <div class="timeline-desc">Získání oficiální certifikace v oblasti kulturistiky a osobního tréninku.</div>
-                        </div>
-                        <div class="timeline-item interactive-element" data-year="2024">
-                            <div class="timeline-year">2024</div>
-                            <div class="timeline-title">R-fitness Návsí</div>
-                            <div class="timeline-desc">Přechod do R-fitness Návsí, zavedení kruhových tréninků pro ženy.</div>
-                        </div>
-                    </div>
-                    <div class="trainer-specializations">
-                        <div class="spec-tags">
-                            <span class="spec-tag">Kulturistika</span>
-                            <span class="spec-tag">Kruhové tréninky</span>
-                            <span class="spec-tag">Ženské lekce</span>
-                            <span class="spec-tag">Skupinové lekce</span>
-                            <span class="spec-tag">Více než 30 let praxe</span>
-                        </div>
-                    </div>
-                    <div class="trainer-cta">
-                        <a href="https://trenerpavellorenczyk.cz/" target="_blank" class="btn btn-primary interactive-element">Navštívit web</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  /* Sizing */
+  --container-max: 1280px;
+  --container-padding: var(--space-lg);
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+  --border-radius-xl: 32px;
 
-    <section class="section" id="services">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Naše služby</h2>
-                <p class="section-subtitle">Kompletní portfolio služeb pro všechny úrovně fitness nadšenců</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card fade-in interactive-element">
-                    <div class="service-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <h3>Osobní tréninky</h3>
-                    <p>Individuální přístup s certifikovanými trenéry. První trénink s Pavlem Lorenczykem zcela zdarma. Specializace na kulturistiku a silový trénink.</p>
-                </div>
-                <div class="service-card fade-in interactive-element">
-                    <div class="service-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63c-.34-1.02-1.28-1.65-2.34-1.65-.38 0-.73.1-1.04.28L14.5 8.5c-.98.67-2.04.68-3.02 0L9.4 7c-.31-.18-.66-.28-1.04-.28-1.06 0-2 .63-2.34 1.65L3.5 16H6v6h4v-6h4v6h4z"/>
-                        </svg>
-                    </div>
-                    <h3>Skupinové lekce</h3>
-                    <p>Kruhové tréninky pro ženy každou sobotu a neděli od 19:00-20:30. Motivující prostředí s profesionálním vedením Pavla Lorenczyka.</p>
-                </div>
-                <div class="service-card fade-in interactive-element">
-                    <div class="service-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/>
-                        </svg>
-                    </div>
-                    <h3>Silový trénink</h3>
-                    <p>Powerlifting a kulturistika s IPF zkušenostmi Tomáše Martynka. Správná technika a postupná progrese pro maximální výsledky.</p>
-                </div>
-                <div class="service-card fade-in interactive-element">
-                    <div class="service-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                    <h3>Závodní příprava</h3>
-                    <p>Příprava na soutěže v silovém trojboji podle IPF pravidel. Zkušenosti z Mistrovství světa a dlouholeté závodní praxe.</p>
-                </div>
-                <div class="service-card fade-in interactive-element">
-                    <div class="service-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20 4H4c-1.1 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                    </div>
-                    <h3>Moderní vybavení</h3>
-                    <p>Špičkové posilovací stroje Technogym a Grünsport v nové moderní hale. Cardio zóna a funkční tréninkové prostory.</p>
-                </div>
-                <div class="service-card fade-in interactive-element">
-                    <div class="service-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-                        </svg>
-                    </div>
-                    <h3>Fitness bar</h3>
-                    <p>Široký sortiment výživových doplňků, proteinů, amino kyselin, kreatinu a dalších sportovních doplňků pro maximální výkon.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 20px rgb(99 102 241 / 0.3);
 
-    <section class="section" id="gallery">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Galerie</h2>
-                <p class="section-subtitle">Podívejte se na naše moderní prostory a špičkové vybavení</p>
-            </div>
+  /* Animations */
+  --transition-fast: 0.15s ease;
+  --transition: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
 
-            <!-- Filter Buttons -->
-            <div class="gallery-filters fade-in">
-                <button class="filter-btn active" data-filter="all">Vše</button>
-                <button class="filter-btn" data-filter="equipment">Vybavení</button>
-                <button class="filter-btn" data-filter="bar">Fitness Bar</button>
-                <button class="filter-btn" data-filter="other">Ostatní</button>
-            </div>
+/* Light theme */
+[data-theme="light"] {
+  --background: var(--white);
+  --surface: var(--gray-100);
+  --surface-hover: var(--gray-200);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-700);
+  --text-muted: var(--gray-500);
+  --border: var(--gray-200);
+  --border-light: var(--gray-300);
+}
 
-            <!-- Gallery Grid -->
-            <div class="gallery-grid">
-                <!-- Časopisy -->
-                <div class="gallery-item fade-in interactive-element" data-category="other">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image1.jpg" alt="Fitness časopisy" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Fitness časopisy</h4>
-                            <p>Inspirace a tipy</p>
-                        </div>
-                    </div>
-                </div>
+/* ========== Reset & Base ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-                <!-- Posilovací stroje -->
-                <div class="gallery-item fade-in interactive-element" data-category="equipment">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image2.jpg" alt="Leg press stroj" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Leg Press</h4>
-                            <p>Profesionální vybavení</p>
-                        </div>
-                    </div>
-                </div>
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
 
-                <div class="gallery-item fade-in interactive-element" data-category="equipment">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image3.jpg" alt="Kardio zóna" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Kardio zóna</h4>
-                            <p>Eliptické trenažéry</p>
-                        </div>
-                    </div>
-                </div>
+body {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--background);
+  overflow-x: hidden;
+  transition: background-color var(--transition), color var(--transition);
+}
 
-                <div class="gallery-item fade-in interactive-element" data-category="equipment">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image4.jpg" alt="Hlavní posilovací sál" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Hlavní sál</h4>
-                            <p>600 m² prostoru</p>
-                        </div>
-                    </div>
-                </div>
+/* ========== Typography ========== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
 
-                <div class="gallery-item fade-in interactive-element" data-category="equipment">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image5.jpg" alt="Posilovací stroje Technogym" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Technogym stroje</h4>
-                            <p>Špičková kvalita</p>
-                        </div>
-                    </div>
-                </div>
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
-                <div class="gallery-item fade-in interactive-element" data-category="equipment">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image6.jpg" alt="Víceúčelové stroje" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Víceúčelové stroje</h4>
-                            <p>Komplexní trénink</p>
-                        </div>
-                    </div>
-                </div>
+p {
+  margin-bottom: var(--space-md);
+}
 
-                <div class="gallery-item fade-in interactive-element" data-category="equipment">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image7.jpg" alt="Volné váhy" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Volné váhy</h4>
-                            <p>Činky všech velikostí</p>
-                        </div>
-                    </div>
-                </div>
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--transition);
+}
 
-                <div class="gallery-item fade-in interactive-element" data-category="equipment">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image8.jpg" alt="Funkční trénink" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Funkční zóna</h4>
-                            <p>Všestranný trénink</p>
-                        </div>
-                    </div>
-                </div>
+/* ========== Utilities ========== */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
 
-                <!-- Fitness Bar -->
-                <div class="gallery-item fade-in interactive-element" data-category="bar">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image9.jpg" alt="Fitness bar - doplňky" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Výživové doplňky</h4>
-                            <p>Široký sortiment</p>
-                        </div>
-                    </div>
-                </div>
+.section {
+  padding: var(--space-5xl) 0;
+  position: relative;
+}
 
-                <div class="gallery-item fade-in interactive-element" data-category="bar">
-                    <div class="gallery-image">
-                        <img src="images/gallery/image10.jpg" alt="Fitness bar - prostor" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-icon">
-                                <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                                </svg>
-                            </div>
-                            <h4>Fitness bar</h4>
-                            <p>Relaxační zóna</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+.section:nth-child(even) {
+  background: var(--surface);
+}
 
-        <!-- Lightbox Modal -->
-        <div class="lightbox" id="lightbox">
-            <div class="lightbox-content">
-                <span class="lightbox-close">&times;</span>
-                <img class="lightbox-image" id="lightboxImage" src="" alt="">
-                <div class="lightbox-caption" id="lightboxCaption"></div>
-                <div class="lightbox-nav">
-                    <button class="lightbox-prev" id="lightboxPrev">‹</button>
-                    <button class="lightbox-next" id="lightboxNext">›</button>
-                </div>
-            </div>
-        </div>
-    </section>
+/* ========== Loading Screen ========== */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
 
-    <section class="section" id="pricing">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Ceník služeb</h2>
-                <p class="section-subtitle">Transparentní ceny bez skrytých poplatků</p>
-            </div>
-            <div class="pricing-categories">
-                <div class="pricing-category fade-in interactive-element">
-                    <div class="pricing-header">
-                        <h3>Fitness centrum</h3>
-                    </div>
-                    <div class="pricing-list">
-                        <div class="pricing-item">
-                            <span class="pricing-name">Jednorázový vstup</span>
-                            <span class="pricing-price">130 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">9 vstupový</span>
-                            <span class="pricing-price">1 150 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">12 vstupový</span>
-                            <span class="pricing-price">1 400 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">24 vstupový</span>
-                            <span class="pricing-price">2 200 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">Permanentka</span>
-                            <span class="pricing-price">1 300 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">Kohoutkova voda</span>
-                            <span class="pricing-price">Zdarma</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">Šumivý nápoj</span>
-                            <span class="pricing-price">5 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">Mléko</span>
-                            <span class="pricing-price">5 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">Iontový nápoj</span>
-                            <span class="pricing-price">10 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">Čaj</span>
-                            <span class="pricing-price">20 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">Káva</span>
-                            <span class="pricing-price">35 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">Protein</span>
-                            <span class="pricing-price">35 Kč</span>
-                        </div>
-                    </div>
-                </div>
+.loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
 
-                <div class="pricing-category fade-in interactive-element">
-                    <div class="pricing-header">
-                        <h3>Osobní tréninky</h3>
-                    </div>
-                    <div class="pricing-list">
-                        <div class="pricing-item">
-                            <span class="pricing-name">Tréninková hodina</span>
-                            <span class="pricing-price">400 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">3+1 zdarma</span>
-                            <span class="pricing-price">1 200 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">5 tréninkových lekcí</span>
-                            <span class="pricing-price">2 000 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">10 tréninkových lekcí</span>
-                            <span class="pricing-price">3 500 Kč</span>
-                        </div>
-                        <div class="pricing-item">
-                            <span class="pricing-name">Kruhové tréninky (So-Ne)</span>
-                            <span class="pricing-price">19:00-20:30</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+.loading-content {
+  text-align: center;
+}
 
-    <section class="section" id="contact">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Kde nás najdete</h2>
-                <p class="section-subtitle">Navštivte nás v nové moderní hale v Návsí</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info slide-in-left">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Adresa</h4>
-                            <p>R-fitness Návsí (Nová hala)<br>Návsí 1165<br>739 92 Návsí</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Telefon</h4>
-                            <p>Puczok René: +420 736 541 890<br>Pavel Lorenczyk: +420 608 820 997</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
-                                <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Provozní doba</h4>
-                            <p>Pondělí - Pátek: 8:00 - 21:00<br>Sobota: 8:00 - 19:00<br>Neděle: 8:00 - 19:00</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H6V4h8v16z"/>
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-                            <h4>IČO</h4>
-                            <p>07759398</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="map-container slide-in-right">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2598.8!2d18.6789!3d49.6889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4713e5a7c4a8d5e7%3A0x5e9b8f2a1c3d4e6f!2sN%C3%A1vs%C3%AD%201165%2C%20739%2092%20N%C3%A1vs%C3%AD%2C%20Czechia!5e0!3m2!1sen!2scz!4v1625123456789!5m2!1sen!2scz" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Mapa R-fitness Návsí">
-                    </iframe>
-                </div>
-            </div>
-        </div>
-    </section>
+.loading-logo {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-lg);
+  animation: pulse 2s ease-in-out infinite;
+}
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>R-FITNESS NÁVSÍ</h4>
-                    <p>Moderní fitness centrum s certifikovanými trenéry a profesionálním vybavením v srdci Návsí.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Rychlé odkazy</h4>
-                    <p><a href="#about">O nás</a></p>
-                    <p><a href="#trainers">Trenéři</a></p>
-                    <p><a href="#services">Služby</a></p>
-                    <p><a href="#gallery">Galerie</a></p>
-                    <p><a href="#pricing">Ceník</a></p>
-                </div>
-                <div class="footer-section">
-                    <h4>Kontakt</h4>
-                    <p>Návsí 1165, 739 92 Návsí</p>
-                    <p>+420 736 541 890</p>
-                    <p>IČO: 07759398</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2024 R-fitness Návsí. Všechna práva vyhrazena.</p>
-            </div>
-        </div>
-    </footer>
+.loading-progress {
+  width: 200px;
+  height: 4px;
+  background: var(--surface);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: var(--space-lg) auto;
+}
 
-    <!-- Scroll to top button -->
-    <button class="scroll-to-top" id="scrollToTop">↑</button>
+.loading-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius: 2px;
+  animation: loading 3s ease-in-out infinite;
+}
 
-    <!-- Main JavaScript -->
-    <script src="js/script.js"></script>
-</body>
-</html>
+.loading-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ========== Cursor ========== */
+.cursor-follower {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: var(--primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: difference;
+}
+
+@media (hover: hover) {
+  .cursor-follower {
+    opacity: 0.6;
+  }
+}
+
+/* ========== Background Effects ========== */
+.bg-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  animation: float 20s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  top: 60%;
+  right: 10%;
+  animation-delay: -10s;
+}
+
+.orb-3 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+  bottom: 20%;
+  left: 50%;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+/* ========== Navigation ========== */
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  transition: all var(--transition);
+}
+
+.main-nav.scrolled {
+  background: rgba(15, 15, 15, 0.95);
+  box-shadow: var(--shadow-lg);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.nav-brand .logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  filter: none;
+  -webkit-text-fill-color: initial;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: var(--space-xl);
+}
+
+.nav-link {
+  position: relative;
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: var(--space-sm) 0;
+  transition: color var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  transition: width var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  font-size: 1.2rem;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-hover);
+  transform: scale(1.1);
+}
+
+.cta-button {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  transition: all var(--transition);
+  box-shadow: var(--shadow-glow);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgb(99 102 241 / 0.4);
+}
+
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.mobile-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  transition: all var(--transition);
+}
+
+/* ========== Hero Section ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--background) 0%, var(--surface) 100%);
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
+  width: 100%;
+  max-width: var(--container-max);
+  padding: 0 var(--container-padding);
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 50px;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-title {
+  margin-bottom: var(--space-lg);
+  font-weight: 700;
+}
+
+.title-line {
+  display: block;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.title-line:nth-child(1) { animation-delay: 0.3s; }
+.title-line:nth-child(2) { animation-delay: 0.4s; }
+.title-line:nth-child(3) { animation-delay: 0.5s; }
+
+.highlight {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xl);
+  line-height: 1.7;
+  animation: fadeInUp 0.8s ease 0.6s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-4xl);
+  animation: fadeInUp 0.8s ease 0.7s both;
+}
+
+.btn {
+  position: relative;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 40px rgb(99 102 241 / 0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.btn-secondary:hover {
+  background: var(--surface);
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.btn-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+  z-index: -1;
+}
+
+.btn:hover .btn-glow {
+  left: 100%;
+}
+
+.play-icon {
+  width: 20px;
+  height: 20px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.8rem;
+}
+
+/* Hero Stats */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  animation: fadeInUp 0.8s ease 0.8s both;
+}
+
+.stat-card {
+  text-align: center;
+  padding: var(--space-xl);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-lg);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-slow);
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: var(--space-sm);
+  line-height: 1;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.stat-decoration {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: conic-gradient(var(--primary), var(--accent), var(--primary));
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Hero Visual */
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.visual-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fitness-icon {
+  font-size: 8rem;
+  animation: bounce 3s ease-in-out infinite;
+}
+
+.visual-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.element {
+  position: absolute;
+  font-size: 2rem;
+  animation: orbit 8s linear infinite;
+}
+
+.element-1 {
+  top: 10%;
+  left: 50%;
+  animation-delay: 0s;
+}
+
+.element-2 {
+  top: 50%;
+  right: 10%;
+  animation-delay: -2s;
+}
+
+.element-3 {
+  bottom: 10%;
+  left: 50%;
+  animation-delay: -4s;
+}
+
+.element-4 {
+  top: 50%;
+  left: 10%;
+  animation-delay: -6s;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-muted);
+  animation: fadeInUp 0.8s ease 1s both;
+}
+
+.scroll-text {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.scroll-arrow {
+  width: 2px;
+  height: 30px;
+  background: var(--text-muted);
+  position: relative;
+  animation: scrollDown 2s ease-in-out infinite;
+}
+
+.scroll-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid var(--text-muted);
+  border-right: 2px solid var(--text-muted);
+  transform: rotate(45deg);
+}
+
+@keyframes scrollDown {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ========== Section Headers ========== */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-4xl);
+}
+
+.section-badge {
+  display: inline-block;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: var(--primary);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+}
+
+.section-title {
+  margin-bottom: var(--space-lg);
+  color: var(--text-primary);
+}
+
+.section-description {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ========== About Section ========== */
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-xl);
+}
+
+.advantage-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  transition: all var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+}
+
+.advantage-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.advantage-card:hover::before {
+  opacity: 0.05;
+}
+
+.advantage-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-xl);
+}
+
+.advantage-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-lg);
+  font-size: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.advantage-card h3 {
+  margin-bottom: var(--space-md);
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+.advantage-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+}
+
+/* ========== Services Section ========== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-xl);
+}
+
+.service-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+  transition: all var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card.featured {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+}
+
+.featured-badge {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: var(--primary);
+  color: white;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-xl);
+}
+
+.service-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.service-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.service-card h3 {
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.service-content p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
+}
+
+.service-features {
+  list-style: none;
+}
+
+.service-features li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.service-features li::before {
+  content: '✓';
+  color: var(--success);
+  font-weight: bold;
+}
+
+/* ========== Trainers Section ========== */
+.trainers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--space-xl);
+  margin-bottom: var(--space-4xl);
+}
+
+.trainer-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-slow);
+}
+
+.trainer-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-xl);
+}
+
+.trainer-image {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  padding: var(--space-xl);
+  text-align: center;
+  position: relative;
+}
+
+.trainer-avatar {
+  font-size: 4rem;
+  margin-bottom: var(--space-md);
+}
+
+.trainer-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.trainer-info {
+  padding: var(--space-xl);
+}
+
+.trainer-info h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.trainer-title {
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.trainer-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.trainer-specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.specialty {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Experience Timeline */
+.experience-timeline {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+  margin-top: var(--space-4xl);
+}
+
+.experience-timeline h3 {
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.timeline {
+  position: relative;
+  padding: var(--space-lg) 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: var(--space-xl);
+  padding: 0 var(--space-xl);
+  display: flex;
+  align-items: center;
+}
+
+.timeline-item:nth-child(odd) {
+  justify-content: flex-start;
+}
+
+.timeline-item:nth-child(even) {
+  justify-content: flex-end;
+}
+
+.timeline-item::before {
+  content: attr(data-year);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--primary);
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+.timeline-content {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  max-width: 300px;
+  transition: all var(--transition);
+}
+
+.timeline-item:hover .timeline-content {
+  transform: scale(1.05);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.timeline-content h4 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.timeline-content p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ========== Pricing Section ========== */
+.pricing-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: var(--space-xs);
+  margin: 0 auto var(--space-4xl);
+  width: fit-content;
+  position: relative;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--transition);
+  position: relative;
+  z-index: 2;
+}
+
+.toggle-btn.active {
+  color: var(--text-primary);
+}
+
+.toggle-indicator {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  width: 50%;
+  height: calc(100% - var(--space-sm));
+  background: var(--primary);
+  border-radius: var(--border-radius);
+  transition: transform var(--transition);
+  z-index: 1;
+}
+
+.toggle-btn[data-period="yearly"].active ~ .toggle-indicator {
+  transform: translateX(100%);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-xl);
+}
+
+.pricing-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  position: relative;
+  transition: all var(--transition-slow);
+}
+
+.pricing-card.popular {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+  transform: scale(1.05);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: white;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-xl);
+}
+
+.pricing-card.popular:hover {
+  transform: translateY(-8px) scale(1.05);
+}
+
+.pricing-header {
+  margin-bottom: var(--space-xl);
+}
+
+.pricing-header h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+
+.currency {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.amount {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.period {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.pricing-features {
+  margin-bottom: var(--space-xl);
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  color: var(--text-secondary);
+}
+
+.feature.disabled {
+  opacity: 0.5;
+}
+
+.feature-icon {
+  color: var(--success);
+  font-weight: bold;
+}
+
+.feature.disabled .feature-icon {
+  color: var(--error);
+}
+
+.pricing-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.pricing-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ========== Contact Section ========== */
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  margin-bottom: var(--space-4xl);
+}
+
+.contact-item {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.contact-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.contact-details h4 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.contact-details p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Contact Form */
+.contact-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: var(--space-lg);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-group label {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  color: var(--text-muted);
+  transition: all var(--transition);
+  pointer-events: none;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:focus + label,
+.form-group select:not([value=""]) + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  transform: translateY(-150%) scale(0.9);
+  color: var(--primary);
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Map */
+.map-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.map-placeholder {
+  color: var(--text-secondary);
+}
+
+.map-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+/* ========== Footer ========== */
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: var(--space-4xl) 0 var(--space-xl);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-4xl);
+  margin-bottom: var(--space-xl);
+}
+
+.footer-brand {
+  max-width: 300px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-md);
+}
+
+.footer-brand p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.link-group h4 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.link-group a {
+  display: block;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+  transition: color var(--transition);
+}
+
+.link-group a:hover {
+  color: var(--primary);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.footer-social a {
+  width: 40px;
+  height: 40px;
+  background: var(--surface-hover);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.footer-social a:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* ========== Back to Top ========== */
+.back-to-top {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ========== Animations ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* AOS Animations */
+[data-aos="fade-up"] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-aos="fade-right"] {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.8s ease;
+}
+
+[data-aos="fade-right"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+[data-aos="fade-left"] {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s ease;
+}
+
+[data-aos="fade-left"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+[data-aos="zoom-in"] {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.8s ease;
+}
+
+[data-aos="zoom-in"].aos-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+    text-align: center;
+  }
+  
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container-padding: var(--space-md);
+    --space-5xl: var(--space-4xl);
+  }
+  
+  .mobile-toggle {
+    display: flex;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    flex-direction: column;
+    padding: var(--space-lg);
+    gap: var(--space-lg);
+    transform: translateY(-100%);
+    transition: transform var(--transition);
+    z-index: -1;
+  }
+  
+  .nav-menu.active {
+    transform: translateY(0);
+  }
+  
+  .mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  
+  .mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+  
+  .hero-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .advantages-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .trainers-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .timeline::before {
+    left: 20px;
+  }
+  
+  .timeline-item {
+    padding-left: 60px;
+    justify-content: flex-start !important;
+  }
+  
+  .timeline-item::before {
+    left: 20px;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: var(--space-sm) var(--container-padding);
+  }
+  
+  .cta-button {
+    display: none;
+  }
+  
+  .hero {
+    padding: var(--space-4xl) 0;
+  }
+  
+  .section {
+    padding: var(--space-4xl) 0;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+  }
+  
+  .visual-container {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .fitness-icon {
+    font-size: 5rem;
+  }
+}
+
+/* ========== Print Styles ========== */
+@media print {
+  .loading-screen,
+  .cursor-follower,
+  .bg-effects,
+  .main-nav,
+  .back-to-top {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .section {
+    break-inside: avoid;
+  }
+}
