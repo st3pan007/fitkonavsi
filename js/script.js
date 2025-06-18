@@ -1,4 +1,4 @@
-// R-fitness Návsí - Main JavaScript
+// R-fitness Návsí - Main JavaScript with Clean Animations
 
 // Theme toggle functionality
 const themeToggle = document.getElementById('themeToggle');
@@ -73,6 +73,10 @@ function createParticles() {
     }
 }
 
+// Easing functions for smooth animations
+const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded');
@@ -94,16 +98,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Intersection Observer for animations
+    // Intersection Observer for animations with improved settings
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
+                // Staggered animation for better visual flow
+                setTimeout(() => {
+                    entry.target.classList.add('animate');
+                }, index * 150);
             }
         });
     }, observerOptions);
@@ -113,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    // Timeline animation with stagger effect
+    // Timeline animation with improved stagger effect
     const timelineObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -121,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 timelineItems.forEach((item, index) => {
                     setTimeout(() => {
                         item.classList.add('animate');
-                    }, index * 300);
+                    }, index * 200); // Increased delay for cleaner effect
                 });
             }
         });
@@ -133,36 +140,96 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==========================================
-    // COUNTER ANIMATION FOR STATS - KLÍČOVÝ KÓD!
+    // CLEAN COUNTER ANIMATION WITH STABLE LAYOUT
     // ==========================================
     
+    function setupCounterStableLayout(counter, finalText) {
+        // Create temporary element to measure final width
+        const measureElement = document.createElement('span');
+        measureElement.style.cssText = `
+            visibility: hidden;
+            position: absolute;
+            font-family: ${getComputedStyle(counter).fontFamily};
+            font-size: ${getComputedStyle(counter).fontSize};
+            font-weight: ${getComputedStyle(counter).fontWeight};
+            letter-spacing: ${getComputedStyle(counter).letterSpacing};
+        `;
+        measureElement.textContent = finalText;
+        
+        document.body.appendChild(measureElement);
+        const finalWidth = measureElement.offsetWidth;
+        document.body.removeChild(measureElement);
+        
+        // Set stable layout properties
+        counter.style.cssText += `
+            min-width: ${Math.max(finalWidth, 80)}px;
+            display: inline-block;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+        `;
+        
+        return finalWidth;
+    }
+
+    function animateCounter(counter, target, duration = 2000) {
+        const finalText = target + '+';
+        
+        // Setup stable layout first
+        setupCounterStableLayout(counter, finalText);
+        
+        const startTime = performance.now();
+        const startValue = 0;
+        
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Use easing function for smooth animation
+            const easedProgress = easeOutCubic(progress);
+            const currentValue = Math.floor(startValue + (target * easedProgress));
+            
+            // Update display
+            if (progress < 1) {
+                counter.textContent = currentValue + '+';
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = finalText;
+                // Add completion effect
+                counter.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    counter.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }
+        
+        requestAnimationFrame(updateCounter);
+    }
+
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const counter = entry.target;
                 const target = parseInt(counter.getAttribute('data-target'));
                 
-                // Zkontrolujeme, jestli už nebyla animace spuštěna
+                // Check if animation already ran
                 if (counter.hasAttribute('data-animated')) return;
                 counter.setAttribute('data-animated', 'true');
                 
-                let current = 0;
-                const increment = target / 60; // 60 kroků pro hladkou animaci
+                // Add smooth transition for the scale effect
+                counter.style.transition = 'transform 0.2s ease-out';
                 
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        counter.textContent = target + '+';
-                        clearInterval(timer);
-                    } else {
-                        counter.textContent = Math.floor(current) + '+';
-                    }
-                }, 50); // Každých 50ms
+                // Start clean animation with delay for better visual flow
+                setTimeout(() => {
+                    animateCounter(counter, target, 2500); // Longer duration for smoother effect
+                }, 300);
             }
         });
-    }, observerOptions);
+    }, {
+        threshold: 0.3, // Higher threshold for more intentional triggering
+        rootMargin: '0px 0px -100px 0px'
+    });
 
-    // Observe stat numbers - počkáme na DOM
+    // Observe stat numbers
     const statNumbers = document.querySelectorAll('.stat-number');
     console.log('Found stat numbers:', statNumbers.length);
     
@@ -170,15 +237,21 @@ document.addEventListener('DOMContentLoaded', function() {
         counterObserver.observe(stat);
     });
 
-    // Header scroll effect
+    // Header scroll effect with smoother transition
+    let lastScrollY = 0;
+    
     window.addEventListener('scroll', () => {
         const header = document.getElementById('header');
         if (header) {
-            if (window.scrollY > 100) {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
+            
+            lastScrollY = currentScrollY;
         }
     });
 
@@ -201,20 +274,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Interactive timeline items
+    // Enhanced timeline items with cleaner interactions
     document.querySelectorAll('.timeline-item').forEach(item => {
         item.addEventListener('click', function() {
             // Remove active class from all items in the same timeline
             const timeline = this.closest('.timeline');
-            timeline.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
+            timeline.querySelectorAll('.timeline-item').forEach(i => {
+                i.classList.remove('active');
+                i.style.transform = '';
+            });
             
             // Add active class to clicked item
             this.classList.add('active');
             
-            // Add a visual feedback
+            // Smoother visual feedback
+            this.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
             this.style.transform = 'translateY(-8px) translateX(10px) scale(1.02)';
+            
             setTimeout(() => {
-                this.style.transform = '';
+                this.style.transform = 'translateY(-5px) translateX(5px)';
             }, 300);
         });
     });
@@ -223,12 +301,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrollToTopBtn = document.getElementById('scrollToTop');
 
     if (scrollToTopBtn) {
+        let scrollTimeout;
+        
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
-            }
+            clearTimeout(scrollTimeout);
+            
+            scrollTimeout = setTimeout(() => {
+                if (window.scrollY > 500) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            }, 10);
         });
 
         scrollToTopBtn.addEventListener('click', () => {
@@ -239,25 +323,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Interactive mouse effects
+    // Enhanced interactive mouse effects
     document.querySelectorAll('.interactive-element').forEach(element => {
         element.addEventListener('mouseenter', function(e) {
             const rect = this.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
-            const beforeElement = this.querySelector('::before') || this;
-            if (beforeElement) {
-                beforeElement.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0, 82, 255, 0.1) 0%, transparent 50%)`;
-            }
+            // More subtle effect
+            this.style.setProperty('--mouse-x', x + 'px');
+            this.style.setProperty('--mouse-y', y + 'px');
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            this.style.removeProperty('--mouse-x');
+            this.style.removeProperty('--mouse-y');
         });
     });
 
-    // Add glitch effect to logo on hover
+    // Logo glitch effect with cleaner animation
     const logo = document.querySelector('.logo');
     if (logo) {
         logo.addEventListener('mouseenter', function() {
-            this.style.animation = 'glitch 0.3s ease-in-out';
+            this.style.animation = 'glitch 0.4s ease-in-out';
         });
 
         logo.addEventListener('animationend', function() {
@@ -265,47 +353,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add glitch keyframes
+    // Improved glitch keyframes
     const style = document.createElement('style');
     style.textContent = `
         @keyframes glitch {
             0% { transform: translateX(0); }
-            20% { transform: translateX(-2px); }
-            40% { transform: translateX(2px); }
-            60% { transform: translateX(-1px); }
-            80% { transform: translateX(1px); }
-            100% { transform: translateX(0); }
+            15% { transform: translateX(-2px) scale(1.01); }
+            30% { transform: translateX(2px) scale(0.99); }
+            45% { transform: translateX(-1px) scale(1.02); }
+            60% { transform: translateX(1px) scale(0.98); }
+            75% { transform: translateX(-0.5px) scale(1.01); }
+            100% { transform: translateX(0) scale(1); }
         }
     `;
     document.head.appendChild(style);
 
-    // Enhanced timeline interactivity
+    // Enhanced timeline interactivity with cleaner effects
     document.querySelectorAll('.timeline-item').forEach((item, index) => {
         item.addEventListener('mouseenter', function() {
-            // Add glow effect
-            this.style.boxShadow = '0 20px 50px rgba(0, 82, 255, 0.3), inset 0 0 20px rgba(0, 82, 255, 0.1)';
+            // Cleaner glow effect
+            this.style.transition = 'all 0.3s ease-out';
+            this.style.boxShadow = '0 15px 40px rgba(0, 82, 255, 0.25), inset 0 0 15px rgba(0, 82, 255, 0.08)';
             
-            // Add data visualization on hover
+            // Enhanced tooltip
             const year = this.getAttribute('data-year');
             if (year && !this.querySelector('.tooltip')) {
                 const tooltip = document.createElement('div');
                 tooltip.className = 'tooltip';
                 tooltip.style.cssText = `
                     position: absolute;
-                    top: -40px;
+                    top: -45px;
                     left: 50%;
-                    transform: translateX(-50%);
-                    background: linear-gradient(45deg, var(--primary-blue), var(--light-blue));
+                    transform: translateX(-50%) translateY(10px);
+                    background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
                     color: white;
-                    padding: 8px 16px;
-                    border-radius: 20px;
-                    font-size: 0.8rem;
-                    font-weight: bold;
+                    padding: 10px 18px;
+                    border-radius: 25px;
+                    font-size: 0.85rem;
+                    font-weight: 600;
                     z-index: 10;
-                    animation: fadeInTooltip 0.3s ease;
+                    opacity: 0;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    box-shadow: 0 8px 25px rgba(0, 82, 255, 0.3);
                 `;
-                tooltip.textContent = `Rok: ${year}`;
+                tooltip.textContent = `${year}`;
                 this.appendChild(tooltip);
+                
+                // Animate tooltip in
+                requestAnimationFrame(() => {
+                    tooltip.style.opacity = '1';
+                    tooltip.style.transform = 'translateX(-50%) translateY(0)';
+                });
             }
         });
 
@@ -313,23 +411,15 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.boxShadow = '';
             const tooltip = this.querySelector('.tooltip');
             if (tooltip) {
-                tooltip.remove();
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateX(-50%) translateY(10px)';
+                setTimeout(() => tooltip.remove(), 300);
             }
         });
     });
 
-    // Add tooltip animation
-    const tooltipStyle = document.createElement('style');
-    tooltipStyle.textContent = `
-        @keyframes fadeInTooltip {
-            0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-    `;
-    document.head.appendChild(tooltipStyle);
-
     // ==========================================
-    //   GALLERY FUNCTIONALITY - GALERIE
+    //   ENHANCED GALLERY FUNCTIONALITY
     // ==========================================
 
     const filterBtns = document.querySelectorAll('.filter-btn');
@@ -344,16 +434,20 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentImageIndex = 0;
     let visibleImages = [];
 
-    // Filter functionality - Filtrování kategorií
+    // Enhanced filter functionality
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const filter = this.getAttribute('data-filter');
             
-            // Update active button - Aktivní tlačítko
-            filterBtns.forEach(b => b.classList.remove('active'));
+            // Update active button with smoother transition
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.style.transform = 'translateY(0)';
+            });
             this.classList.add('active');
+            this.style.transform = 'translateY(-2px)';
             
-            // Filter gallery items - Filtrování obrázků
+            // Filter gallery items with improved animation
             galleryItems.forEach((item, index) => {
                 const category = item.getAttribute('data-category');
                 
@@ -362,29 +456,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => {
                         item.style.opacity = '1';
                         item.style.transform = 'translateY(0) scale(1)';
-                    }, index * 100);
+                    }, index * 50); // Faster stagger for cleaner effect
                 } else {
                     item.style.opacity = '0';
-                    item.style.transform = 'translateY(20px) scale(0.9)';
+                    item.style.transform = 'translateY(20px) scale(0.95)';
                     setTimeout(() => {
                         item.classList.add('hidden');
-                    }, 300);
+                    }, 200);
                 }
             });
             
-            // Update visible images array for lightbox navigation
             updateVisibleImages();
         });
     });
 
-    // Update visible images array - Aktualizace viditelných obrázků
+    // Update visible images array
     function updateVisibleImages() {
         visibleImages = [];
         galleryItems.forEach(item => {
             if (!item.classList.contains('hidden')) {
                 const img = item.querySelector('img');
-                const title = item.querySelector('h4').textContent;
-                const description = item.querySelector('p').textContent;
+                const title = item.querySelector('h4')?.textContent || '';
+                const description = item.querySelector('p')?.textContent || '';
                 visibleImages.push({
                     src: img.src,
                     alt: img.alt,
@@ -395,19 +488,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Initialize visible images - Inicializace viditelných obrázků
+    // Initialize visible images
     updateVisibleImages();
 
-    // Lightbox functionality - Funkce lightboxu
+    // Enhanced lightbox functionality
     galleryItems.forEach((item, index) => {
         item.addEventListener('click', function() {
             if (this.classList.contains('hidden')) return;
             
             const img = this.querySelector('img');
-            const title = this.querySelector('h4').textContent;
-            const description = this.querySelector('p').textContent;
+            const title = this.querySelector('h4')?.textContent || '';
+            const description = this.querySelector('p')?.textContent || '';
             
-            // Find index in visible images
             currentImageIndex = visibleImages.findIndex(image => image.src === img.src);
             
             openLightbox(img.src, `${title} - ${description}`);
@@ -415,47 +507,50 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function openLightbox(src, caption) {
+        if (!lightbox || !lightboxImage) return;
+        
         lightboxImage.src = src;
-        lightboxCaption.textContent = caption;
+        if (lightboxCaption) lightboxCaption.textContent = caption;
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
         
-        // Add keyboard navigation - Klávesová navigace
         document.addEventListener('keydown', handleKeydown);
     }
 
     function closeLightbox() {
+        if (!lightbox) return;
+        
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
         document.removeEventListener('keydown', handleKeydown);
     }
 
     function showPrevImage() {
-        if (visibleImages.length === 0) return;
+        if (visibleImages.length === 0 || !lightboxImage || !lightboxCaption) return;
         
         currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : visibleImages.length - 1;
         const image = visibleImages[currentImageIndex];
-        lightboxImage.src = image.src;
-        lightboxCaption.textContent = `${image.title} - ${image.description}`;
         
-        // Add animation - Animace
+        // Smooth transition
         lightboxImage.style.opacity = '0';
         setTimeout(() => {
+            lightboxImage.src = image.src;
+            lightboxCaption.textContent = `${image.title} - ${image.description}`;
             lightboxImage.style.opacity = '1';
         }, 150);
     }
 
     function showNextImage() {
-        if (visibleImages.length === 0) return;
+        if (visibleImages.length === 0 || !lightboxImage || !lightboxCaption) return;
         
         currentImageIndex = currentImageIndex < visibleImages.length - 1 ? currentImageIndex + 1 : 0;
         const image = visibleImages[currentImageIndex];
-        lightboxImage.src = image.src;
-        lightboxCaption.textContent = `${image.title} - ${image.description}`;
         
-        // Add animation - Animace
+        // Smooth transition
         lightboxImage.style.opacity = '0';
         setTimeout(() => {
+            lightboxImage.src = image.src;
+            lightboxCaption.textContent = `${image.title} - ${image.description}`;
             lightboxImage.style.opacity = '1';
         }, 150);
     }
@@ -474,7 +569,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Event listeners - Obsluha událostí
+    // Event listeners with null checks
     if (lightboxClose) {
         lightboxClose.addEventListener('click', closeLightbox);
     }
@@ -487,7 +582,6 @@ document.addEventListener('DOMContentLoaded', function() {
         lightboxNext.addEventListener('click', showNextImage);
     }
 
-    // Close lightbox when clicking outside image - Zavřít při kliknutí mimo
     if (lightbox) {
         lightbox.addEventListener('click', function(e) {
             if (e.target === lightbox) {
@@ -496,54 +590,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Prevent image dragging - Zakázat táhání obrázku
     if (lightboxImage) {
         lightboxImage.addEventListener('dragstart', function(e) {
             e.preventDefault();
         });
     }
 
-    // Add loading animation to images - Loading animace
+    // Enhanced loading animation for images
     galleryItems.forEach(item => {
         const img = item.querySelector('img');
         if (img) {
             img.addEventListener('load', function() {
                 this.style.opacity = '1';
+                this.style.transform = 'scale(1)';
             });
             
-            // Set initial opacity for loading effect
-            img.style.opacity = '0';
-            img.style.transition = 'opacity 0.3s ease';
+            img.style.cssText += `
+                opacity: 0;
+                transform: scale(1.05);
+                transition: all 0.4s ease-out;
+            `;
         }
     });
 
-    // Intersection Observer for gallery items animation - Animace při scrollování
+    // Enhanced gallery items animation
     const galleryObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('animate');
-                }, index * 100);
+                }, index * 80);
             }
         });
     }, {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -30px 0px'
     });
 
-    // Observe gallery items - Sledování obrázků galerie
     galleryItems.forEach(item => {
         galleryObserver.observe(item);
     });
 
     console.log('🖼️ Gallery loaded successfully with', galleryItems.length, 'images');
-    console.log('🚀 R-fitness Návsí - Professional Dark Theme Loaded Successfully!');
+    console.log('🚀 R-fitness Návsí - Enhanced Clean Theme Loaded Successfully!');
 });
 
-// Performance optimization - throttle scroll events
+// Optimized scroll performance
 let ticking = false;
 function updateOnScroll() {
-    // Update any scroll-based animations here
     ticking = false;
 }
 
@@ -554,7 +648,7 @@ function requestTick() {
     }
 }
 
-window.addEventListener('scroll', requestTick);
+window.addEventListener('scroll', requestTick, { passive: true });
 
 // Preload critical resources
 const preloadLinks = [
