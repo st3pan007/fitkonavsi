@@ -61,6 +61,8 @@ window.addEventListener('load', () => {
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
     
+    if (!particlesContainer) return;
+    
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -71,275 +73,265 @@ function createParticles() {
     }
 }
 
-createParticles();
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
-    observer.observe(el);
-});
-
-// Timeline animation with stagger effect
-const timelineObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const timelineItems = entry.target.querySelectorAll('.timeline-item');
-            timelineItems.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('animate');
-                }, index * 300);
-            });
-        }
-    });
-}, observerOptions);
-
-// Observe timelines
-document.querySelectorAll('.timeline').forEach(timeline => {
-    timelineObserver.observe(timeline);
-});
-
-// Counter animation for stats
-const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const counter = entry.target;
-            const target = parseInt(counter.getAttribute('data-target'));
-            let current = 0;
-            const increment = target / 60;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    counter.textContent = target + '+';
-                    clearInterval(timer);
-                } else {
-                    counter.textContent = Math.floor(current) + '+';
-                }
-            }, 50);
-        }
-    });
-}, observerOptions);
-
-// Observe stat numbers
-document.querySelectorAll('.stat-number').forEach(stat => {
-    counterObserver.observe(stat);
-});
-
-// Header scroll effect
-window.addEventListener('scroll', () => {
-    const header = document.getElementById('header');
-    if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
-
-// Mobile menu toggle
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const nav = document.getElementById('nav');
-
-mobileMenuBtn.addEventListener('click', function() {
-    nav.classList.toggle('active');
-    this.textContent = nav.classList.contains('active') ? '✕' : '☰';
-});
-
-// Close mobile menu when clicking on a link
-nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        mobileMenuBtn.textContent = '☰';
-    });
-});
-
-// Interactive timeline items
-document.querySelectorAll('.timeline-item').forEach(item => {
-    item.addEventListener('click', function() {
-        // Remove active class from all items in the same timeline
-        const timeline = this.closest('.timeline');
-        timeline.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
-        
-        // Add active class to clicked item
-        this.classList.add('active');
-        
-        // Add a visual feedback
-        this.style.transform = 'translateY(-8px) translateX(10px) scale(1.02)';
-        setTimeout(() => {
-            this.style.transform = '';
-        }, 300);
-    });
-});
-
-// Scroll to top functionality
-const scrollToTopBtn = document.getElementById('scrollToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        scrollToTopBtn.classList.add('visible');
-    } else {
-        scrollToTopBtn.classList.remove('visible');
-    }
-});
-
-scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Interactive mouse effects
-document.querySelectorAll('.interactive-element').forEach(element => {
-    element.addEventListener('mouseenter', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const beforeElement = this.querySelector('::before') || this;
-        if (beforeElement) {
-            beforeElement.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0, 82, 255, 0.1) 0%, transparent 50%)`;
-        }
-    });
-});
-
-// Add glitch effect to logo on hover
-const logo = document.querySelector('.logo');
-logo.addEventListener('mouseenter', function() {
-    this.style.animation = 'glitch 0.3s ease-in-out';
-});
-
-logo.addEventListener('animationend', function() {
-    this.style.animation = '';
-});
-
-// Add glitch keyframes
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes glitch {
-        0% { transform: translateX(0); }
-        20% { transform: translateX(-2px); }
-        40% { transform: translateX(2px); }
-        60% { transform: translateX(-1px); }
-        80% { transform: translateX(1px); }
-        100% { transform: translateX(0); }
-    }
-`;
-document.head.appendChild(style);
-
-// Enhanced timeline interactivity
-document.querySelectorAll('.timeline-item').forEach((item, index) => {
-    item.addEventListener('mouseenter', function() {
-        // Highlight timeline line
-        const timeline = this.closest('.timeline');
-        const timelineLine = timeline.querySelector('::before');
-        
-        // Add glow effect
-        this.style.boxShadow = '0 20px 50px rgba(0, 82, 255, 0.3), inset 0 0 20px rgba(0, 82, 255, 0.1)';
-        
-        // Add data visualization on hover
-        const year = this.getAttribute('data-year');
-        if (year && !this.querySelector('.tooltip')) {
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.style.cssText = `
-                position: absolute;
-                top: -40px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: linear-gradient(45deg, var(--primary-blue), var(--light-blue));
-                color: white;
-                padding: 8px 16px;
-                border-radius: 20px;
-                font-size: 0.8rem;
-                font-weight: bold;
-                z-index: 10;
-                animation: fadeInTooltip 0.3s ease;
-            `;
-            tooltip.textContent = `Rok: ${year}`;
-            this.appendChild(tooltip);
-        }
-    });
-
-    item.addEventListener('mouseleave', function() {
-        this.style.boxShadow = '';
-        const tooltip = this.querySelector('.tooltip');
-        if (tooltip) {
-            tooltip.remove();
-        }
-    });
-});
-
-// Add tooltip animation
-const tooltipStyle = document.createElement('style');
-tooltipStyle.textContent = `
-    @keyframes fadeInTooltip {
-        0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-        100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    }
-`;
-document.head.appendChild(tooltipStyle);
-
-// Performance optimization - throttle scroll events
-let ticking = false;
-function updateOnScroll() {
-    // Update any scroll-based animations here
-    ticking = false;
-}
-
-function requestTick() {
-    if (!ticking) {
-        requestAnimationFrame(updateOnScroll);
-        ticking = true;
-    }
-}
-
-window.addEventListener('scroll', requestTick);
-
-// Preload critical resources
-const preloadLinks = [
-    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap'
-];
-
-preloadLinks.forEach(href => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'style';
-    link.href = href;
-    document.head.appendChild(link);
-});
-
-console.log('🚀 R-fitness Návsí - Professional Dark Theme Loaded Successfully!');
-// ==========================================
-//   GALLERY FUNCTIONALITY - GALERIE
-// ==========================================
-
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded');
+    
+    // Initialize particles
+    createParticles();
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Timeline animation with stagger effect
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const timelineItems = entry.target.querySelectorAll('.timeline-item');
+                timelineItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('animate');
+                    }, index * 300);
+                });
+            }
+        });
+    }, observerOptions);
+
+    // Observe timelines
+    document.querySelectorAll('.timeline').forEach(timeline => {
+        timelineObserver.observe(timeline);
+    });
+
+    // ==========================================
+    // COUNTER ANIMATION FOR STATS - KLÍČOVÝ KÓD!
+    // ==========================================
+    
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.getAttribute('data-target'));
+                
+                // Zkontrolujeme, jestli už nebyla animace spuštěna
+                if (counter.hasAttribute('data-animated')) return;
+                counter.setAttribute('data-animated', 'true');
+                
+                let current = 0;
+                const increment = target / 60; // 60 kroků pro hladkou animaci
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target + '+';
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current) + '+';
+                    }
+                }, 50); // Každých 50ms
+            }
+        });
+    }, observerOptions);
+
+    // Observe stat numbers - počkáme na DOM
+    const statNumbers = document.querySelectorAll('.stat-number');
+    console.log('Found stat numbers:', statNumbers.length);
+    
+    statNumbers.forEach(stat => {
+        counterObserver.observe(stat);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (header) {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const nav = document.getElementById('nav');
+
+    if (mobileMenuBtn && nav) {
+        mobileMenuBtn.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            this.textContent = nav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close mobile menu when clicking on a link
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+    }
+
+    // Interactive timeline items
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.addEventListener('click', function() {
+            // Remove active class from all items in the same timeline
+            const timeline = this.closest('.timeline');
+            timeline.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
+            
+            // Add active class to clicked item
+            this.classList.add('active');
+            
+            // Add a visual feedback
+            this.style.transform = 'translateY(-8px) translateX(10px) scale(1.02)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 300);
+        });
+    });
+
+    // Scroll to top functionality
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Interactive mouse effects
+    document.querySelectorAll('.interactive-element').forEach(element => {
+        element.addEventListener('mouseenter', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const beforeElement = this.querySelector('::before') || this;
+            if (beforeElement) {
+                beforeElement.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0, 82, 255, 0.1) 0%, transparent 50%)`;
+            }
+        });
+    });
+
+    // Add glitch effect to logo on hover
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.addEventListener('mouseenter', function() {
+            this.style.animation = 'glitch 0.3s ease-in-out';
+        });
+
+        logo.addEventListener('animationend', function() {
+            this.style.animation = '';
+        });
+    }
+
+    // Add glitch keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes glitch {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-2px); }
+            40% { transform: translateX(2px); }
+            60% { transform: translateX(-1px); }
+            80% { transform: translateX(1px); }
+            100% { transform: translateX(0); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Enhanced timeline interactivity
+    document.querySelectorAll('.timeline-item').forEach((item, index) => {
+        item.addEventListener('mouseenter', function() {
+            // Add glow effect
+            this.style.boxShadow = '0 20px 50px rgba(0, 82, 255, 0.3), inset 0 0 20px rgba(0, 82, 255, 0.1)';
+            
+            // Add data visualization on hover
+            const year = this.getAttribute('data-year');
+            if (year && !this.querySelector('.tooltip')) {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.style.cssText = `
+                    position: absolute;
+                    top: -40px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(45deg, var(--primary-blue), var(--light-blue));
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                    z-index: 10;
+                    animation: fadeInTooltip 0.3s ease;
+                `;
+                tooltip.textContent = `Rok: ${year}`;
+                this.appendChild(tooltip);
+            }
+        });
+
+        item.addEventListener('mouseleave', function() {
+            this.style.boxShadow = '';
+            const tooltip = this.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.remove();
+            }
+        });
+    });
+
+    // Add tooltip animation
+    const tooltipStyle = document.createElement('style');
+    tooltipStyle.textContent = `
+        @keyframes fadeInTooltip {
+            0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    `;
+    document.head.appendChild(tooltipStyle);
+
+    // ==========================================
+    //   GALLERY FUNCTIONALITY - GALERIE
+    // ==========================================
+
     const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
     const lightbox = document.getElementById('lightbox');
@@ -545,4 +537,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     console.log('🖼️ Gallery loaded successfully with', galleryItems.length, 'images');
+    console.log('🚀 R-fitness Návsí - Professional Dark Theme Loaded Successfully!');
+});
+
+// Performance optimization - throttle scroll events
+let ticking = false;
+function updateOnScroll() {
+    // Update any scroll-based animations here
+    ticking = false;
+}
+
+function requestTick() {
+    if (!ticking) {
+        requestAnimationFrame(updateOnScroll);
+        ticking = true;
+    }
+}
+
+window.addEventListener('scroll', requestTick);
+
+// Preload critical resources
+const preloadLinks = [
+    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap'
+];
+
+preloadLinks.forEach(href => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'style';
+    link.href = href;
+    document.head.appendChild(link);
 });
